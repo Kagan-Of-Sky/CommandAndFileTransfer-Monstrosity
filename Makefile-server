@@ -1,0 +1,26 @@
+#Compiler path
+CC = gcc
+
+#Compiler flags
+CFLAGS  = -Wall
+CFLAGS += -Wextra
+CFLAGS += -pedantic
+
+#Objects
+OBJECTS  = server.o
+OBJECTS += shared.o
+
+#Executable name
+EXECUTABLE = server
+
+build: $(OBJECTS)
+	$(CC) -o $(EXECUTABLE) $(OBJECTS) $(CFLAGS)
+
+server.o: server.c shared.h
+	$(CC) -c server.c $(CFLAGS)
+
+shared.o: shared.h shared.c
+	$(CC) -c shared.c $(CFLAGS)
+
+clean:
+	rm *.o
